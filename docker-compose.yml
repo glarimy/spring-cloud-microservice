@@ -1,0 +1,14 @@
+version: "2.1"
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+    - 27017:27017
+        
+  glarimy/bank-accounts:
+    image: glarimy/bank-accounts:latest
+    ports:
+    - 8001:8080
+    links:
+    - mongo
+    entrypoint: "java -Dspring.data.mongodb.uri=mongodb://mongo:27017/bank -jar /bank-accounts-0.0.1.jar"
