@@ -1,7 +1,6 @@
-FROM openjdk:8-jdk-alpine
-MAINTAINER Krishna Mohan Koyya <krishna@glarimy.com>
-VOLUME /tmp
+FROM maven:3.5-jdk-8 AS build
+COPY src /usr/src/app/src
+COPY pom.xml /usr/src/app
+RUN mvn -f /usr/src/app/pom.xml clean package
 EXPOSE 8080
-ARG JAR_FILE=target/bank-api-1.0.0.jar
-ADD ${JAR_FILE} bank-api-1.0.0.jar
-ENTRYPOINT ["java","-jar","/bank-api-1.0.0.jar"]
+ENTRYPOINT ["java","-jar","/usr/src/app/target/bank-api-1.0.0.jar"]
