@@ -2,17 +2,22 @@ package com.glarimy.bank.api;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "accounts")
 public class Account {
-	private int number;
+	@Id
+	private String number;
 	private Customer customer;
 	private double balance;
 	private List<Transaction> history;
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
